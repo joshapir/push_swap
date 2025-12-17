@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movements.c                                        :+:      :+:    :+:   */
+/*   movements_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joshapir <joshapir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 20:59:48 by joshapir          #+#    #+#             */
-/*   Updated: 2025/02/08 02:35:55 by joshapir         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:08:10 by joshapir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap_bonus.h"
 #include <stdio.h>
 
 void	swap(t_stack **stack, char list)
@@ -22,12 +22,8 @@ void	swap(t_stack **stack, char list)
 	tmp = (*stack)->value;
 	(*stack)->value = (*stack)->next->value;
 	(*stack)->next->value = tmp;
-	if (list == 'a')
-		write(1, "sa\n", 3);
-	else if (list == 'b')
-		write(1, "sb\n", 3);
-	else
-		return ;
+	list = '\0';
+	return ;
 }
 
 void	push(t_stack **stack_a, t_stack **stack_b, char stack)
@@ -38,11 +34,12 @@ void	push(t_stack **stack_a, t_stack **stack_b, char stack)
 		return ;
 	if (stack == 'a')
 	{
+		if (!(*stack_b))
+			return ;
 		temp = (*stack_b);
 		(*stack_b) = (*stack_b)-> next;
 		temp -> next = (*stack_a);
 		*stack_a = temp;
-		write(1, "pa\n", 3);
 	}
 	else
 	{
@@ -50,7 +47,6 @@ void	push(t_stack **stack_a, t_stack **stack_b, char stack)
 		(*stack_a)-> next = (*stack_b);
 		(*stack_b) = (*stack_a);
 		*stack_a = temp;
-		write(1, "pb\n", 3);
 	}
 }
 
@@ -59,7 +55,7 @@ void	rotate(t_stack **lst, char stack)
 	t_stack	*tmp;
 	t_stack	*current;
 
-	if (!(*lst))
+	if (!(*lst) || !lst || !(*lst)-> next)
 		return ;
 	current = (*lst);
 	tmp = (*lst);
@@ -68,12 +64,8 @@ void	rotate(t_stack **lst, char stack)
 	current -> next = tmp;
 	*lst = (*lst)-> next;
 	tmp -> next = NULL;
-	if (stack == 'a')
-		write(1, "ra\n", 3);
-	else if (stack == 'b')
-		write(1, "rb\n", 3);
-	else
-		return ;
+	stack = '\0';
+	return ;
 }
 
 void	reverse_rotate(t_stack **stack, char c)
@@ -82,6 +74,8 @@ void	reverse_rotate(t_stack **stack, char c)
 	t_stack	*new_last;
 	int		i;
 
+	if (!stack || !(*stack) || !(*stack)-> next)
+		return ;
 	i = 0;
 	tmp = *stack;
 	new_last = *stack;
@@ -96,18 +90,15 @@ void	reverse_rotate(t_stack **stack, char c)
 	tmp ->next = *stack;
 	(*stack)-> prev = *stack;
 	*stack = tmp;
-	if (c == 'a')
-		write(1, "rra\n", 4);
-	else if (c == 'b')
-		write(1, "rrb\n", 4);
-	else
-		return ;
+	c = '\0';
+	return ;
 	find_index_of_stack(*stack);
 }
 
 void	rr(t_stack **a, t_stack **b)
 {
-	rotate(&(*a), 'r');
-	rotate(&(*b), 'r');
-	write(1, "rr\n", 3);
+	if (a)
+		rotate(&(*a), 'r');
+	if (b)
+		rotate(&(*b), 'r');
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movements_utils.c                                  :+:      :+:    :+:   */
+/*   movements_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joshapir <joshapir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 20:36:43 by joshapir          #+#    #+#             */
-/*   Updated: 2025/02/11 21:15:53 by joshapir         ###   ########.fr       */
+/*   Updated: 2025/02/11 21:16:33 by joshapir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap_bonus.h"
 
 t_stack	*ft_lstnew(int value)
 {
@@ -56,9 +56,9 @@ void	print_list(t_stack **lst, char list)
 
 	tmp = *lst;
 	if (list == 'a')
-		write (1, "STACK A: ", 9);
+		write(1, "STACK A: ", 9);
 	else
-		write(1, "STACK B: ", 9);
+		write (1, "STACK B: ", 9);
 	while (tmp != NULL)
 	{
 		printf("%ld", tmp->value);
@@ -72,7 +72,8 @@ void	print_list(t_stack **lst, char list)
 
 void	rrr(t_stack **a, t_stack **b)
 {
-	reverse_rotate(&(*a), 'r');
-	reverse_rotate(&(*b), 'r');
-	write(1, "rrr\n", 4);
+	if (a)
+		reverse_rotate(&(*a), 'r');
+	if (b)
+		reverse_rotate(&(*b), 'r');
 }
